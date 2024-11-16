@@ -20,7 +20,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleServiceException(ServiceException e) {
         log.error(SERVICE_EXCEPTION_LOG_FORMAT, e.getMessage(), e);
 
-        ErrorResponse errorResponse = new ErrorResponse(e.getErrorCode());
+        ErrorResponse errorResponse = ErrorResponse.of(e.getErrorCode());
         return new ResponseEntity<>(errorResponse, HttpStatus.valueOf(e.getErrorCode().getHttpStatus()));
     }
 
@@ -28,7 +28,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErrorResponse> handleGeneralException(Exception e) {
         log.error(UNEXPECTED_ERROR_LOG_FORMAT, e.getMessage(), e);
 
-        ErrorResponse errorResponse = new ErrorResponse(ErrorCode.INTERNAL_SERVER_ERROR);
+        ErrorResponse errorResponse = ErrorResponse.of(ErrorCode.INTERNAL_SERVER_ERROR);
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
