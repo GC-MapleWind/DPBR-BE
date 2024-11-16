@@ -10,3 +10,6 @@ springdoc:
     tags-sorter: alpha
 
 api-key: ENC(IrH4GXmFQZadHTiLm3Qywb9dKhfs06iwqBNuNKshq+a3mOqKLJBDRLCWA3ydzh893A8KIfbsyhpHyPq2T4BhBTIMtPeYMYwwexMVUolwtbRbhlMG27+zP+gC6LELk2ddkrYEx9GtF1XP71WQ/D7JYg==)
+
+jwt:
+  secret_key: ENC(8Gsd1p0HtAj/U4X7X+P0Nyh9D+PaGdSyRBnOSNTSyb4eEGFod44doU7BEuRdrlFhQArTPx+hSo+R8LcK2QDMDBn5j9U6+4LeNO6pfsXw1hs2CusjyZw9rkm+ymiDXQdCAYgC/R+cV643bZFQKEvatECi/UNx64AlcTZFxtSzHo7kvUAdIkkdS4vKwx6GQxms)
