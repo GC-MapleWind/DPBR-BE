@@ -2,7 +2,7 @@ spring:
   datasource:
     url: ENC(QPrviyEUHtIsrqCYg+if+wg/IqIz055B3P6qFQIA9pHToKQ15raJurIPRtgKd07y)
     username: ENC(+XUcXvIjYlocEzOhJdVDHQ==)
-    password: ENC(9xIFR3Ltv82oDieKZeJsiPdE9V0gEv4+)
+    password: ENC(z78qrh/3JrfNpuxv1a9PTQNRAylKxKta)
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     show-sql: true
