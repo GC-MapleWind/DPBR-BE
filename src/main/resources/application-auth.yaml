@@ -1,10 +1,8 @@
 spring:
   data:
     redis:
-      host: ENC(8TclaLukMkbxVzJB55K/5J9m0tcnX/mi)
+      host: ENC(P1jbkvrSWN72JMP2h7DlUl/QIln43Adf)
       port: 6379
-  session:
-    store-type: redis
   security:
     oauth2:
       client:
