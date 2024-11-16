@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: ENC(FKrNZ+1dn8FD+DSyCx1ZjCodQI/5STWISgSYTc5eusS1BBmwQF0/OUoEZcl06OYC)
+    username: ENC(SPj9M7iTAJNKo7BHhyjRhQ==)
+    password: ENC(khj8xLQ6WzusMiIZB/t44ZDRBFYGTlY4)
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate

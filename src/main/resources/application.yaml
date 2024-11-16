@@ -1,3 +1,12 @@
 spring:
   application:
     name: DPBR-BE
+  profiles:
+    active: dev, auth
+
+springdoc:
+  swagger-ui:
+    operations-sorter: method
+    tags-sorter: alpha
+
+api-key: ENC(IrH4GXmFQZadHTiLm3Qywb9dKhfs06iwqBNuNKshq+a3mOqKLJBDRLCWA3ydzh893A8KIfbsyhpHyPq2T4BhBTIMtPeYMYwwexMVUolwtbRbhlMG27+zP+gC6LELk2ddkrYEx9GtF1XP71WQ/D7JYg==)
