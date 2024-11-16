@@ -1,7 +1,7 @@
 spring:
   data:
     redis:
-      host: ENC(P1jbkvrSWN72JMP2h7DlUl/QIln43Adf)
+      host: ENC(f98Kns4qaforukStVzUgzXJi/hhdUVfX)
       port: 6379
   security:
     oauth2:
