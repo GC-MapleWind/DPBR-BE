@@ -69,5 +69,5 @@ jobs:
             fi
             
             sudo docker rm $(sudo docker ps --filter 'status=exited' -a -q) 
-            sudo docker run -d --name dpbr -p 8080:8080 -e JAVA_OPTS=-Djasypt.encryptor.password=${{secrets.JASYPT_ENCRYPTOR_PASSWORD}} ${{secrets.DOCKER_USERNAME}}/dpbr:latest
+            sudo docker run -d --name dpbr -p 8080:8080 --net ${{secrets.DOCKER_NETWORK}} -e JAVA_OPTS=-Djasypt.encryptor.password=${{secrets.JASYPT_ENCRYPTOR_PASSWORD}} ${{secrets.DOCKER_USERNAME}}/dpbr:latest
             sudo docker image prune -a -f
