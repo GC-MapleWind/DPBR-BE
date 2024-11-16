@@ -3,6 +3,7 @@ name: dpbr Dev Server CI/CD Workflows
 on:
   push:
     branches: [ "develop" ]
+    workflow_dispatch:
 
 jobs:
   deploy:
