@@ -118,7 +118,7 @@ public class CharacterController {
 		@ApiResponse(responseCode = "404", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
 		@ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
-	@GetMapping("/ranking/level")
+	@GetMapping("/average/level")
 	public ResponseEntity<GlobalResponseDto<AverageResponse>> levelAverage() {
 		return ResponseEntity.status(HttpStatus.OK)
 			.body(GlobalResponseDto.success(averageStatisticsService.level(), SuccessCode.SUCCESS));
@@ -132,7 +132,7 @@ public class CharacterController {
 		@ApiResponse(responseCode = "404", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
 		@ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
-	@GetMapping("/ranking/union")
+	@GetMapping("/average/union")
 	public ResponseEntity<GlobalResponseDto<AverageResponse>> unionAverage() {
 		return ResponseEntity.status(HttpStatus.OK)
 			.body(GlobalResponseDto.success(averageStatisticsService.unionLevel(), SuccessCode.SUCCESS));
@@ -146,7 +146,7 @@ public class CharacterController {
 		@ApiResponse(responseCode = "404", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
 		@ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
-	@GetMapping("/ranking/combat-power")
+	@GetMapping("/average/combat-power")
 	public ResponseEntity<GlobalResponseDto<AverageResponse>> combatPowerAverage() {
 		return ResponseEntity.status(HttpStatus.OK)
 			.body(GlobalResponseDto.success(averageStatisticsService.combatPower(), SuccessCode.SUCCESS));
