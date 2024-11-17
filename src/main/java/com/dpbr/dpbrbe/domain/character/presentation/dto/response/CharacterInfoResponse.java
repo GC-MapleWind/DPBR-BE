@@ -1,10 +1,11 @@
-package com.dpbr.dpbrbe.domain.user.presentation.dto.response;
+package com.dpbr.dpbrbe.domain.character.presentation.dto.response;
 
 import com.dpbr.dpbrbe.global.openAPI.dto.response.CharacterBasicInfoResponse;
 import com.dpbr.dpbrbe.global.openAPI.dto.response.CharacterStatInfoResponse;
 import com.dpbr.dpbrbe.global.openAPI.dto.response.CharacterUnionInfoResponse;
 
 public record CharacterInfoResponse(
+	String name,
 	String gender,
 	String world,
 	String job,
@@ -24,6 +25,7 @@ public record CharacterInfoResponse(
 			.orElse(INVALID_LONG_VALUE);
 
 		return new CharacterInfoResponse(
+			basicInfo.characterName(),
 			basicInfo.characterGender(),
 			basicInfo.worldName(),
 			basicInfo.characterClass(),
