@@ -1,6 +1,6 @@
 package com.dpbr.dpbrbe.domain.character.domain;
 
-import com.dpbr.dpbrbe.domain.user.presentation.dto.response.CharacterInfoResponse;
+import com.dpbr.dpbrbe.domain.character.presentation.dto.response.CharacterInfoResponse;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -76,5 +76,16 @@ public class Character {
 			.combatPower(characterInfo.combatPower())
 			.characterImage(characterInfo.characterImage())
 			.build();
+	}
+
+	public void updateInfo(CharacterInfoResponse characterInfo) {
+		this.name = characterInfo.name();
+		this.gender = characterInfo.gender();
+		this.world = characterInfo.world();
+		this.job = characterInfo.job();
+		this.level = characterInfo.level();
+		this.unionLevel = characterInfo.unionLevel();
+		this.combatPower = characterInfo.combatPower();
+		this.characterImage = characterInfo.characterImage();
 	}
 }
