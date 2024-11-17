@@ -1,7 +1,9 @@
 package com.dpbr.dpbrbe.global.auth.usecase;
 
+import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
+import java.security.GeneralSecurityException;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -14,10 +16,12 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import com.dpbr.dpbrbe.domain.shared.Role;
 import com.dpbr.dpbrbe.domain.user.domain.User;
 import com.dpbr.dpbrbe.domain.user.domain.repository.UserRepository;
 import com.dpbr.dpbrbe.global.auth.domain.GoogleAccessToken;
 import com.dpbr.dpbrbe.global.auth.domain.GoogleProfile;
+import com.dpbr.dpbrbe.global.auth.exception.InvalidEmailException;
 import com.dpbr.dpbrbe.global.auth.presentation.dto.response.AuthResponse;
 import com.dpbr.dpbrbe.global.jwt.JwtProvider;
 
@@ -41,6 +45,9 @@ public class AuthService {
 
 	@Value("${spring.security.oauth2.client.registration.google.redirect-uri}")
 	private String redirectUri;
+
+	@Value("${google.email.suffix}")
+	private String suffix;
 
 	@Transactional
 	public AuthResponse getUserInfo(String code) {
@@ -90,7 +97,11 @@ public class AuthService {
 		String email = googleProfile.email();
 		String name = googleProfile.name();
 
-		return userRepository.findByEmail(email).orElseGet(() -> userRepository.save(User.create(email, name)));
+		if (!email.endsWith(suffix)) {
+			throw new InvalidEmailException();
+		}
+
+		return userRepository.findByEmail(email).orElseGet(() -> userRepository.save(User.create(email, name, Role.USER)));
 	}
 
 	private AuthResponse createToken(User user) {
