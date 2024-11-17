@@ -51,7 +51,9 @@ public class SecurityConfig {
 				authorize
 					.requestMatchers("/v3/api-docs/**", "/swagger-ui/**").permitAll() // API 명세서
 					.requestMatchers("/login/**").permitAll() // 구글 로그인
-					.anyRequest().authenticated()
+					.requestMatchers("/v1/user/**").permitAll() // 사용자
+					.requestMatchers("/v1/character/**").permitAll() // 캐릭터
+					.anyRequest().permitAll()
 			);
 
 		http
