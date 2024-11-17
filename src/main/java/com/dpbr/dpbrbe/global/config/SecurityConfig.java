@@ -76,9 +76,9 @@ public class SecurityConfig {
 		configuration.setAllowedOrigins(Arrays.asList(
 			"http://localhost:8080",
 			"http://localhost:3000",
-			"http://https://api.mapletest.kro.kr",
+			"http://api.mapletest.kro.kr",
 			"http://mapletest.kro.kr",
-			"https://https://api.mapletest.kro.kr",
+			"https://api.mapletest.kro.kr",
 			"https://mapletest.kro.kr"));
 		configuration.setAllowedMethods(Arrays.asList("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
 		configuration.setAllowCredentials(true);
