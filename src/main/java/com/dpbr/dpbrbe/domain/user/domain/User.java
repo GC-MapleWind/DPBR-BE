@@ -29,6 +29,10 @@ public class User extends BaseTimeEntity {
 	@Column(length = 100)
 	private String name;
 
+	@NotNull
+	@Column(length = 100)
+	private String major;
+
     @Column
     private String refreshToken;
 
@@ -45,17 +49,21 @@ public class User extends BaseTimeEntity {
     private String ocid;
 
 	@Builder
-	private User(String email, String name, Role role) {
+	private User(String email, String name, String major, Role role) {
 		this.email = email;
 		this.name = name;
+		this.major = major;
 		this.role = role;
 	}
 
-	public static User create(String email, String name) {
+	public static User create(String email, String name, Role role) {
+		String[] nameArr = name.split("/");
+
 		return User.builder()
 			.email(email)
-			.name(name)
-			.role(Role.USER)
+			.name(nameArr[0])
+			.major(nameArr[1])
+			.role(role)
 			.build();
 	}
 
