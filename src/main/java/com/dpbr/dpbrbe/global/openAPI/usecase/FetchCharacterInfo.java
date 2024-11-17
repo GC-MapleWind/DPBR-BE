@@ -5,7 +5,7 @@ import java.io.IOException;
 import org.springframework.stereotype.Service;
 
 import com.dpbr.dpbrbe.global.openAPI.dto.response.CharacterBasicInfoResponse;
-import com.dpbr.dpbrbe.domain.user.presentation.dto.response.CharacterInfoResponse;
+import com.dpbr.dpbrbe.domain.character.presentation.dto.response.CharacterInfoResponse;
 import com.dpbr.dpbrbe.global.openAPI.dto.response.CharacterStatInfoResponse;
 import com.dpbr.dpbrbe.global.openAPI.dto.response.CharacterUnionInfoResponse;
 import com.dpbr.dpbrbe.global.openAPI.Connection;
