@@ -61,6 +61,6 @@ public class UserController {
 	@PostMapping("/statistics/major")
 	public ResponseEntity<GlobalResponseDto<Map<String, Integer>>> statisticsMajor() throws IOException {
 		return ResponseEntity.status(HttpStatus.OK)
-			.body(GlobalResponseDto.success(statisticsService.major()));
+			.body(GlobalResponseDto.success(statisticsService.major(), SuccessCode.SUCCESS));
 	}
 }
