@@ -10,7 +10,7 @@ spring:
           google:
             client-id: ENC(0KfLmG4krCuj78h3NzbJ5w7daYodZMdlra/gPnPUIUMH9olEWVcshVtjRJhWCeQGMoYE8yRSQLsc/vHMHrsRz4OHUU6Xjq9U8pYlvP6Um010JwRyn4NldQ==)
             client-secret: ENC(38gm9Lh2aAy0LSarrLubfKrKnu69uvZSC44kEgiF3teY18tRlVR/EtSiAUa/x2Eb)
-            redirect-uri: ENC(ULweVkfXHiZlOIFgyb87gjZWOTiyiHH7u6CYvsF9aKPJynso/4U027ymmvV0ccC/)
+            redirect-uri: ENC(jK7RbHgUjI6VZ0adrdbAwO++w/WkB48n7/2hpUOa29/WWbyXwxnRa557PWUKvddq)
             scope: ENC(j37IUVM+yav4Q2/56wpouHMBZ5ngKInV)
   datasource:
     url: ENC(a0peoKpQH7OYf9ZtCj5AkqGEkj3ariH4j+Wj8CGoiEBJExphuDkswV660eC0FGE7)
