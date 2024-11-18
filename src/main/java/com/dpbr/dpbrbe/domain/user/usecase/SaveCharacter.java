@@ -39,6 +39,7 @@ public class SaveCharacter {
 		characterRepository.save(Character.of(ocid, request.name(), characterInfo));
 
 		user.updateOcid(ocid);
+		userRepository.save(user);
 
 		return SAVE_CHARACTER_SUCCESS;
 	}
