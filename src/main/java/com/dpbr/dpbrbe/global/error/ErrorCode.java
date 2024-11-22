@@ -21,6 +21,7 @@ public enum ErrorCode {
 	ROLE_FORBIDDEN(HttpStatus.FORBIDDEN.value(), "ROLE_FORBIDDEN", "액세스할 수 있는 권한이 아닙니다."),
 
 	CHARACTER_NOT_FOUND(HttpStatus.NOT_FOUND.value(), "CHARACTER_NOT_FOUND", "존재하지 않는 캐릭터입니다."),
+	USER_CHARACTER_NOT_FOUND(HttpStatus.NOT_FOUND.value(), "USER_CHARACTER_NOT_FOUND(", "사용자의 캐릭터가 없습니다."),
 
 	USER_NOT_FOUND(HttpStatus.NOT_FOUND.value(), "USER_NOT_FOUND", "존재하지 않는 사용자입니다."),
 
