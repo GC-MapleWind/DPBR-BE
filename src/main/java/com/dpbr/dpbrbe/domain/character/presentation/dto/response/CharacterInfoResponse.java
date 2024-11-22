@@ -1,9 +1,13 @@
 package com.dpbr.dpbrbe.domain.character.presentation.dto.response;
 
+import com.dpbr.dpbrbe.domain.character.domain.Character;
 import com.dpbr.dpbrbe.global.openAPI.dto.response.CharacterBasicInfoResponse;
 import com.dpbr.dpbrbe.global.openAPI.dto.response.CharacterStatInfoResponse;
 import com.dpbr.dpbrbe.global.openAPI.dto.response.CharacterUnionInfoResponse;
 
+import lombok.Builder;
+
+@Builder
 public record CharacterInfoResponse(
 	String name,
 	String gender,
@@ -17,21 +21,36 @@ public record CharacterInfoResponse(
 
 	private static final long INVALID_LONG_VALUE = -1L;
 
-	public static CharacterInfoResponse of(CharacterBasicInfoResponse basicInfo, CharacterUnionInfoResponse unionInfo, CharacterStatInfoResponse statInfo) {
+	public static CharacterInfoResponse of(CharacterBasicInfoResponse basicInfo, CharacterUnionInfoResponse unionInfo,
+		CharacterStatInfoResponse statInfo) {
 		Long combatPower = statInfo.finalStats().stream()
 			.filter(stat -> "전투력".equals(stat.statName()))
 			.map(stat -> Long.valueOf(stat.statValue()))
 			.findFirst()
 			.orElse(INVALID_LONG_VALUE);
 
-		return new CharacterInfoResponse(
-			basicInfo.characterName(),
-			basicInfo.characterGender(),
-			basicInfo.worldName(),
-			basicInfo.characterClass(),
-			basicInfo.characterLevel(),
-			unionInfo.unionLevel(),
-			combatPower,
-			basicInfo.characterImage());
+		return CharacterInfoResponse.builder()
+			.name(basicInfo.characterName())
+			.gender(basicInfo.characterGender())
+			.world(basicInfo.worldName())
+			.job(basicInfo.characterClass())
+			.level(basicInfo.characterLevel())
+			.unionLevel(unionInfo.unionLevel())
+			.combatPower(combatPower)
+			.characterImage(basicInfo.characterImage())
+			.build();
+	}
+
+	public static CharacterInfoResponse from(Character character) {
+		return CharacterInfoResponse.builder()
+			.name(character.getName())
+			.gender(character.getGender())
+			.world(character.getWorld())
+			.job(character.getJob())
+			.level(character.getLevel())
+			.unionLevel(character.getUnionLevel())
+			.combatPower(character.getCombatPower())
+			.characterImage(character.getCharacterImage())
+			.build();
 	}
 }

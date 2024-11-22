@@ -6,7 +6,7 @@ import com.dpbr.dpbrbe.domain.character.domain.Character;
 import com.dpbr.dpbrbe.domain.character.domain.repository.CharacterRepository;
 import com.dpbr.dpbrbe.domain.character.exception.CharacterNotFoundException;
 import com.dpbr.dpbrbe.domain.character.presentation.dto.request.SearchRequest;
-import com.dpbr.dpbrbe.domain.character.presentation.dto.response.InfoResponse;
+import com.dpbr.dpbrbe.domain.character.presentation.dto.response.CharacterInfoResponse;
 
 import lombok.AllArgsConstructor;
 
@@ -16,8 +16,8 @@ public class SearchService {
 
 	private final CharacterRepository characterRepository;
 
-	public InfoResponse execute(SearchRequest request) {
+	public CharacterInfoResponse execute(SearchRequest request) {
 		Character character = characterRepository.findByName(request.name()).orElseThrow(CharacterNotFoundException::new);
-		return InfoResponse.from(character);
+		return CharacterInfoResponse.from(character);
 	}
 }
