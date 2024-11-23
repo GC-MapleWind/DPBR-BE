@@ -39,4 +39,16 @@ public class RankService {
 				InfoResponse.from(character)))
 			.toList();
 	}
+
+	public InfoResponse topLevel() {
+		return InfoResponse.from(characterRepository.findAllByOrderByLevelDesc().get(0));
+	}
+
+	public InfoResponse topCombatPower() {
+		return InfoResponse.from(characterRepository.findAllByOrderByCombatPowerDesc().get(0));
+	}
+
+	public InfoResponse topUnionLevel() {
+		return InfoResponse.from(characterRepository.findAllByOrderByUnionLevelDesc().get(0));
+	}
 }
