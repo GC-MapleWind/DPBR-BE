@@ -26,6 +26,8 @@ public class UpdateInfoService {
 		Character character = characterRepository.findByName(request.name()).orElseThrow(CharacterNotFoundException::new);
 		character.updateInfo(fetchCharacterInfo.execute(character.getOcid()));
 
+		characterRepository.save(character);
+
 		return UPDATE_CHARACTER_SUCCESS;
 	}
 }
