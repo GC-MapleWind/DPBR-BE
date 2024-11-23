@@ -77,7 +77,7 @@ public class SecurityConfig {
 			"http://localhost:8080",
 			"http://localhost:3000",
 			"http://mapletest.kro.kr:8080",
-			"http://mapletest.kro.kr:3000"));
+			"http://mapletest.kro.kr"));
 		configuration.setAllowedMethods(Arrays.asList("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
 		configuration.setAllowCredentials(true);
 		configuration.setAllowedHeaders(List.of("*"));
