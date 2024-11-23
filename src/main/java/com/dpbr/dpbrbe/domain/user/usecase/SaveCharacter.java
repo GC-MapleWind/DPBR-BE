@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.dpbr.dpbrbe.domain.character.domain.Character;
 import com.dpbr.dpbrbe.domain.user.presentation.dto.request.CharacterRequest;
 import com.dpbr.dpbrbe.domain.character.domain.repository.CharacterRepository;
-import com.dpbr.dpbrbe.domain.character.presentation.dto.response.CharacterInfoResponse;
+import com.dpbr.dpbrbe.domain.character.presentation.dto.response.InfoResponse;
 import com.dpbr.dpbrbe.domain.user.domain.User;
 import com.dpbr.dpbrbe.domain.user.domain.repository.UserRepository;
 import com.dpbr.dpbrbe.domain.user.exception.UserNotFoundException;
@@ -34,7 +34,7 @@ public class SaveCharacter {
 
 		String ocid = fetchOcid.execute(request.name());
 
-		CharacterInfoResponse characterInfo = fetchCharacterInfo.execute(ocid);
+		InfoResponse characterInfo = fetchCharacterInfo.execute(ocid);
 
 		characterRepository.save(Character.of(ocid, request.name(), characterInfo));
 

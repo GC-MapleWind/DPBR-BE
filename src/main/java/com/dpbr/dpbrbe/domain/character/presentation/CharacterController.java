@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.dpbr.dpbrbe.domain.character.presentation.dto.request.SearchRequest;
 import com.dpbr.dpbrbe.domain.character.presentation.dto.request.UpdateRequest;
 import com.dpbr.dpbrbe.domain.character.presentation.dto.response.AverageResponse;
-import com.dpbr.dpbrbe.domain.character.presentation.dto.response.CharacterInfoResponse;
+import com.dpbr.dpbrbe.domain.character.presentation.dto.response.InfoResponse;
 import com.dpbr.dpbrbe.domain.character.presentation.dto.response.RankingResponse;
 import com.dpbr.dpbrbe.domain.character.usecase.AverageStatisticsService;
 import com.dpbr.dpbrbe.domain.character.usecase.RankService;
@@ -63,7 +63,7 @@ public class CharacterController {
 		@ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
 	@GetMapping("/search")
-	public ResponseEntity<GlobalResponseDto<CharacterInfoResponse>> SearchCharacter(SearchRequest request) {
+	public ResponseEntity<GlobalResponseDto<InfoResponse>> SearchCharacter(SearchRequest request) {
 		return ResponseEntity.status(HttpStatus.OK)
 			.body(GlobalResponseDto.success(searchService.execute(request), SuccessCode.SUCCESS));
 	}

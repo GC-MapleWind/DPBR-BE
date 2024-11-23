@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dpbr.dpbrbe.domain.character.presentation.dto.response.CharacterInfoResponse;
+import com.dpbr.dpbrbe.domain.character.presentation.dto.response.InfoResponse;
 import com.dpbr.dpbrbe.domain.user.presentation.dto.request.CharacterRequest;
 import com.dpbr.dpbrbe.domain.user.usecase.FindUserCharacter;
 import com.dpbr.dpbrbe.domain.user.usecase.SaveCharacter;
@@ -77,7 +77,7 @@ public class UserController {
 		@ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
 	@GetMapping("/my-character")
-	public ResponseEntity<GlobalResponseDto<CharacterInfoResponse>> findUserCharacter(
+	public ResponseEntity<GlobalResponseDto<InfoResponse>> findUserCharacter(
 		@AuthenticationPrincipal UserDetails userDetails) {
 		return ResponseEntity.status(HttpStatus.OK)
 			.body(GlobalResponseDto.success(findUserCharacter.execute(userDetails), SuccessCode.SUCCESS));

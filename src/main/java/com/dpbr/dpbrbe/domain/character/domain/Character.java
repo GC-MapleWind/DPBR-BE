@@ -1,6 +1,6 @@
 package com.dpbr.dpbrbe.domain.character.domain;
 
-import com.dpbr.dpbrbe.domain.character.presentation.dto.response.CharacterInfoResponse;
+import com.dpbr.dpbrbe.domain.character.presentation.dto.response.InfoResponse;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -64,7 +64,7 @@ public class Character {
 		this.characterImage = characterImage;
 	}
 
-	public static Character of(String ocid, String name, CharacterInfoResponse characterInfo) {
+	public static Character of(String ocid, String name, InfoResponse characterInfo) {
 		return Character.builder()
 			.ocid(ocid)
 			.name(name)
@@ -78,7 +78,7 @@ public class Character {
 			.build();
 	}
 
-	public void updateInfo(CharacterInfoResponse characterInfo) {
+	public void updateInfo(InfoResponse characterInfo) {
 		this.name = characterInfo.name();
 		this.gender = characterInfo.gender();
 		this.world = characterInfo.world();

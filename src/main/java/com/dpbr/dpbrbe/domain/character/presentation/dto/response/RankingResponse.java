@@ -5,9 +5,9 @@ import lombok.Builder;
 @Builder
 public record RankingResponse(
 	Long ranking,
-	CharacterInfoResponse info) {
+	InfoResponse info) {
 
-	public static RankingResponse of(Long ranking, CharacterInfoResponse info) {
+	public static RankingResponse of(Long ranking, InfoResponse info) {
 		return RankingResponse.builder()
 			.ranking(ranking)
 			.info(info)
