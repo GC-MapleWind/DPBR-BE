@@ -8,7 +8,7 @@ import com.dpbr.dpbrbe.global.openAPI.dto.response.CharacterUnionInfoResponse;
 import lombok.Builder;
 
 @Builder
-public record InfoResponse(
+public record CharacterInfoResponse(
 	String name,
 	String gender,
 	String world,
@@ -21,7 +21,7 @@ public record InfoResponse(
 
 	private static final long INVALID_LONG_VALUE = -1L;
 
-	public static InfoResponse of(CharacterBasicInfoResponse basicInfo, CharacterUnionInfoResponse unionInfo,
+	public static CharacterInfoResponse of(CharacterBasicInfoResponse basicInfo, CharacterUnionInfoResponse unionInfo,
 		CharacterStatInfoResponse statInfo) {
 		Long combatPower = statInfo.finalStats().stream()
 			.filter(stat -> "전투력".equals(stat.statName()))
@@ -29,7 +29,7 @@ public record InfoResponse(
 			.findFirst()
 			.orElse(INVALID_LONG_VALUE);
 
-		return InfoResponse.builder()
+		return CharacterInfoResponse.builder()
 			.name(basicInfo.characterName())
 			.gender(basicInfo.characterGender())
 			.world(basicInfo.worldName())
@@ -41,8 +41,8 @@ public record InfoResponse(
 			.build();
 	}
 
-	public static InfoResponse from(Character character) {
-		return InfoResponse.builder()
+	public static CharacterInfoResponse from(Character character) {
+		return CharacterInfoResponse.builder()
 			.name(character.getName())
 			.gender(character.getGender())
 			.world(character.getWorld())

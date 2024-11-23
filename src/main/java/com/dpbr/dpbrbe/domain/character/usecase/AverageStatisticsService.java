@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.dpbr.dpbrbe.domain.character.domain.Character;
 import com.dpbr.dpbrbe.domain.character.domain.repository.CharacterRepository;
-import com.dpbr.dpbrbe.domain.character.presentation.dto.response.AverageResponse;
+import com.dpbr.dpbrbe.domain.character.presentation.dto.response.CharacterAverageResponse;
 
 import lombok.AllArgsConstructor;
 
@@ -24,37 +24,37 @@ public class AverageStatisticsService {
 		return characterRepository.findAll().size();
 	}
 
-	public AverageResponse level() {
+	public CharacterAverageResponse level() {
 		return calculateAverage(characterRepository.findAll(), Character::getLevel);
 	}
 
-	public AverageResponse combatPower() {
+	public CharacterAverageResponse combatPower() {
 		return calculateAverage(characterRepository.findAll(), Character::getCombatPower);
 	}
 
-	public AverageResponse unionLevel() {
+	public CharacterAverageResponse unionLevel() {
 		return calculateAverage(characterRepository.findAll(), Character::getUnionLevel);
 	}
 
-	private AverageResponse calculateAverage(List<Character> characters, ToIntFunction<Character> mapper) {
+	private CharacterAverageResponse calculateAverage(List<Character> characters, ToIntFunction<Character> mapper) {
 		if (characters.isEmpty()) {
-			return AverageResponse.form(BigDecimal.ZERO);
+			return CharacterAverageResponse.form(BigDecimal.ZERO);
 		}
 		BigDecimal total = characters.stream()
 			.map(character -> BigDecimal.valueOf(mapper.applyAsInt(character)))
 			.reduce(BigDecimal.ZERO, BigDecimal::add);
 		BigDecimal average = total.divide(BigDecimal.valueOf(characters.size()), 4, RoundingMode.HALF_UP);
-		return AverageResponse.form(average);
+		return CharacterAverageResponse.form(average);
 	}
 
-	private AverageResponse calculateAverage(List<Character> characters, ToLongFunction<Character> mapper) {
+	private CharacterAverageResponse calculateAverage(List<Character> characters, ToLongFunction<Character> mapper) {
 		if (characters.isEmpty()) {
-			return AverageResponse.form(BigDecimal.ZERO);
+			return CharacterAverageResponse.form(BigDecimal.ZERO);
 		}
 		BigDecimal total = characters.stream()
 			.map(character -> BigDecimal.valueOf(mapper.applyAsLong(character)))
 			.reduce(BigDecimal.ZERO, BigDecimal::add);
 		BigDecimal average = total.divide(BigDecimal.valueOf(characters.size()), 4, RoundingMode.HALF_UP);
-		return AverageResponse.form(average);
+		return CharacterAverageResponse.form(average);
 	}
 }

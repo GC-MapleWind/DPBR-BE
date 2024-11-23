@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dpbr.dpbrbe.domain.character.presentation.dto.request.SearchRequest;
 import com.dpbr.dpbrbe.domain.character.presentation.dto.request.UpdateRequest;
-import com.dpbr.dpbrbe.domain.character.presentation.dto.response.AverageResponse;
-import com.dpbr.dpbrbe.domain.character.presentation.dto.response.InfoResponse;
-import com.dpbr.dpbrbe.domain.character.presentation.dto.response.RankingResponse;
-import com.dpbr.dpbrbe.domain.character.presentation.dto.response.SearchResponse;
+import com.dpbr.dpbrbe.domain.character.presentation.dto.response.CharacterAverageResponse;
+import com.dpbr.dpbrbe.domain.character.presentation.dto.response.CharacterInfoResponse;
+import com.dpbr.dpbrbe.domain.character.presentation.dto.response.CharacterRankingResponse;
+import com.dpbr.dpbrbe.domain.character.presentation.dto.response.CharacterSearchResponse;
 import com.dpbr.dpbrbe.domain.character.usecase.AverageStatisticsService;
 import com.dpbr.dpbrbe.domain.character.usecase.RankService;
 import com.dpbr.dpbrbe.domain.character.usecase.SearchService;
@@ -64,7 +64,7 @@ public class CharacterController {
 		@ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
 	@GetMapping("/search")
-	public ResponseEntity<GlobalResponseDto<SearchResponse>> SearchCharacter(SearchRequest request) {
+	public ResponseEntity<GlobalResponseDto<CharacterSearchResponse>> SearchCharacter(SearchRequest request) {
 		return ResponseEntity.status(HttpStatus.OK)
 			.body(GlobalResponseDto.success(searchService.execute(request), SuccessCode.SUCCESS));
 	}
@@ -78,7 +78,7 @@ public class CharacterController {
 		@ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
 	@GetMapping("/ranking/level")
-	public ResponseEntity<GlobalResponseDto<List<RankingResponse>>> levelRanking() {
+	public ResponseEntity<GlobalResponseDto<List<CharacterRankingResponse>>> levelRanking() {
 		return ResponseEntity.status(HttpStatus.OK)
 			.body(GlobalResponseDto.success(rankService.level(), SuccessCode.SUCCESS));
 	}
@@ -92,7 +92,7 @@ public class CharacterController {
 		@ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
 	@GetMapping("/ranking/union")
-	public ResponseEntity<GlobalResponseDto<List<RankingResponse>>> unionRanking() {
+	public ResponseEntity<GlobalResponseDto<List<CharacterRankingResponse>>> unionRanking() {
 		return ResponseEntity.status(HttpStatus.OK)
 			.body(GlobalResponseDto.success(rankService.unionLevel(), SuccessCode.SUCCESS));
 	}
@@ -106,7 +106,7 @@ public class CharacterController {
 		@ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
 	@GetMapping("/ranking/combat-power")
-	public ResponseEntity<GlobalResponseDto<List<RankingResponse>>> combatPowerRanking() {
+	public ResponseEntity<GlobalResponseDto<List<CharacterRankingResponse>>> combatPowerRanking() {
 		return ResponseEntity.status(HttpStatus.OK)
 			.body(GlobalResponseDto.success(rankService.combatPower(), SuccessCode.SUCCESS));
 	}
@@ -120,7 +120,7 @@ public class CharacterController {
 		@ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
 	@GetMapping("/average/level")
-	public ResponseEntity<GlobalResponseDto<AverageResponse>> levelAverage() {
+	public ResponseEntity<GlobalResponseDto<CharacterAverageResponse>> levelAverage() {
 		return ResponseEntity.status(HttpStatus.OK)
 			.body(GlobalResponseDto.success(averageStatisticsService.level(), SuccessCode.SUCCESS));
 	}
@@ -134,7 +134,7 @@ public class CharacterController {
 		@ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
 	@GetMapping("/average/union")
-	public ResponseEntity<GlobalResponseDto<AverageResponse>> unionAverage() {
+	public ResponseEntity<GlobalResponseDto<CharacterAverageResponse>> unionAverage() {
 		return ResponseEntity.status(HttpStatus.OK)
 			.body(GlobalResponseDto.success(averageStatisticsService.unionLevel(), SuccessCode.SUCCESS));
 	}
@@ -148,7 +148,7 @@ public class CharacterController {
 		@ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
 	@GetMapping("/average/combat-power")
-	public ResponseEntity<GlobalResponseDto<AverageResponse>> combatPowerAverage() {
+	public ResponseEntity<GlobalResponseDto<CharacterAverageResponse>> combatPowerAverage() {
 		return ResponseEntity.status(HttpStatus.OK)
 			.body(GlobalResponseDto.success(averageStatisticsService.combatPower(), SuccessCode.SUCCESS));
 	}
@@ -162,7 +162,7 @@ public class CharacterController {
 		@ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
 	@GetMapping("/top/level")
-	public ResponseEntity<GlobalResponseDto<InfoResponse>> topLevel() {
+	public ResponseEntity<GlobalResponseDto<CharacterInfoResponse>> topLevel() {
 		return ResponseEntity.status(HttpStatus.OK)
 			.body(GlobalResponseDto.success(rankService.topLevel(), SuccessCode.SUCCESS));
 	}
@@ -176,7 +176,7 @@ public class CharacterController {
 		@ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
 	@GetMapping("/top/union")
-	public ResponseEntity<GlobalResponseDto<InfoResponse>> topUnionLevel() {
+	public ResponseEntity<GlobalResponseDto<CharacterInfoResponse>> topUnionLevel() {
 		return ResponseEntity.status(HttpStatus.OK)
 			.body(GlobalResponseDto.success(rankService.topUnionLevel(), SuccessCode.SUCCESS));
 	}
@@ -190,7 +190,7 @@ public class CharacterController {
 		@ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
 	@GetMapping("/top/combat-power")
-	public ResponseEntity<GlobalResponseDto<InfoResponse>> topCombatPower() {
+	public ResponseEntity<GlobalResponseDto<CharacterInfoResponse>> topCombatPower() {
 		return ResponseEntity.status(HttpStatus.OK)
 			.body(GlobalResponseDto.success(rankService.topCombatPower(), SuccessCode.SUCCESS));
 	}

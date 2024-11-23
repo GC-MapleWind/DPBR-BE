@@ -5,17 +5,17 @@ import java.math.BigDecimal;
 import lombok.Builder;
 
 @Builder
-public record SearchResponse(
-	InfoResponse info,
+public record CharacterSearchResponse(
+	CharacterInfoResponse info,
 	Integer sameWorldCharacterCount,
 	Integer sameJobCharacterCount,
 	BigDecimal levelPercentage,
 	BigDecimal unionPercentage,
 	BigDecimal combatPowerPercentage
 ) {
-	public static SearchResponse of(InfoResponse info, Integer sameWorldCharacterCount, Integer sameJobCharacterCount,
+	public static CharacterSearchResponse of(CharacterInfoResponse info, Integer sameWorldCharacterCount, Integer sameJobCharacterCount,
 		BigDecimal levelPercentage, BigDecimal unionPercentage, BigDecimal combatPowerPercentage) {
-		return SearchResponse.builder()
+		return CharacterSearchResponse.builder()
 			.info(info)
 			.sameWorldCharacterCount(sameWorldCharacterCount)
 			.sameJobCharacterCount(sameJobCharacterCount)
