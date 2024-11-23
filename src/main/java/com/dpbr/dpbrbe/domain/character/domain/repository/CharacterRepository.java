@@ -16,4 +16,8 @@ public interface CharacterRepository extends JpaRepository<Character, String> {
 	List<Character> findAllByOrderByLevelDesc();
 
 	List<Character> findAllByOrderByUnionLevelDesc();
+
+	Integer countByWorld(String world);
+
+	Integer countByJob(String job);
 }
