@@ -54,9 +54,4 @@ public class AuthController {
 	public ResponseEntity<JwtResponse> refresh(@RequestBody RefreshRequest request) {
 		return ResponseEntity.ok(jwtProvider.refreshAccessToken(request.refreshToken()));
 	}
-
-	@GetMapping("/health-check")
-	public ResponseEntity<Void> checkHealthStatus() {
-		return new ResponseEntity<>(HttpStatus.OK);
-	}
 }
