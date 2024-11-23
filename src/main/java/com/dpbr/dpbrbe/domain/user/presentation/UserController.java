@@ -62,8 +62,8 @@ public class UserController {
 		@ApiResponse(responseCode = "404", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
 		@ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
-	@PostMapping("/statistics/major")
-	public ResponseEntity<GlobalResponseDto<Map<String, Integer>>> statisticsMajor() throws IOException {
+	@GetMapping("/statistics/major")
+	public ResponseEntity<GlobalResponseDto<Map<String, Integer>>> statisticsMajor() {
 		return ResponseEntity.status(HttpStatus.OK)
 			.body(GlobalResponseDto.success(statisticsService.major(), SuccessCode.SUCCESS));
 	}
