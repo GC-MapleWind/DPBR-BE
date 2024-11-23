@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.dpbr.dpbrbe.domain.character.presentation.dto.request.SearchRequest;
 import com.dpbr.dpbrbe.domain.character.presentation.dto.request.UpdateRequest;
 import com.dpbr.dpbrbe.domain.character.presentation.dto.response.AverageResponse;
+import com.dpbr.dpbrbe.domain.character.presentation.dto.response.InfoResponse;
 import com.dpbr.dpbrbe.domain.character.presentation.dto.response.RankingResponse;
 import com.dpbr.dpbrbe.domain.character.presentation.dto.response.SearchResponse;
 import com.dpbr.dpbrbe.domain.character.usecase.AverageStatisticsService;
@@ -150,5 +151,61 @@ public class CharacterController {
 	public ResponseEntity<GlobalResponseDto<AverageResponse>> combatPowerAverage() {
 		return ResponseEntity.status(HttpStatus.OK)
 			.body(GlobalResponseDto.success(averageStatisticsService.combatPower(), SuccessCode.SUCCESS));
+	}
+
+	@Operation(summary = "레벨 1등 캐릭터", description = "전체 전투력 1등 캐릭터의 정보를 호출합니다.")
+	@ApiResponses({
+		@ApiResponse(responseCode = "200"),
+		@ApiResponse(responseCode = "401", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+		@ApiResponse(responseCode = "403", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+		@ApiResponse(responseCode = "404", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+		@ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+	})
+	@GetMapping("/top/level")
+	public ResponseEntity<GlobalResponseDto<InfoResponse>> topLevel() {
+		return ResponseEntity.status(HttpStatus.OK)
+			.body(GlobalResponseDto.success(rankService.topLevel(), SuccessCode.SUCCESS));
+	}
+
+	@Operation(summary = "유니온 레벨 1등 캐릭터", description = "전체 유니온 레벨 1등 캐릭터의 정보를 호출합니다.")
+	@ApiResponses({
+		@ApiResponse(responseCode = "200"),
+		@ApiResponse(responseCode = "401", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+		@ApiResponse(responseCode = "403", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+		@ApiResponse(responseCode = "404", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+		@ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+	})
+	@GetMapping("/top/union")
+	public ResponseEntity<GlobalResponseDto<InfoResponse>> topUnionLevel() {
+		return ResponseEntity.status(HttpStatus.OK)
+			.body(GlobalResponseDto.success(rankService.topUnionLevel(), SuccessCode.SUCCESS));
+	}
+
+	@Operation(summary = "전투력 1등 캐릭터", description = "전체 전투력 1등 캐릭터의 정보를 호출합니다.")
+	@ApiResponses({
+		@ApiResponse(responseCode = "200"),
+		@ApiResponse(responseCode = "401", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+		@ApiResponse(responseCode = "403", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+		@ApiResponse(responseCode = "404", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+		@ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+	})
+	@GetMapping("/top/combat-power")
+	public ResponseEntity<GlobalResponseDto<InfoResponse>> topCombatPower() {
+		return ResponseEntity.status(HttpStatus.OK)
+			.body(GlobalResponseDto.success(rankService.topCombatPower(), SuccessCode.SUCCESS));
+	}
+
+	@Operation(summary = "캐릭터 수", description = "전체 캐릭터의 수를 호출합니다.")
+	@ApiResponses({
+		@ApiResponse(responseCode = "200"),
+		@ApiResponse(responseCode = "401", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+		@ApiResponse(responseCode = "403", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+		@ApiResponse(responseCode = "404", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
+		@ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+	})
+	@GetMapping("/count")
+	public ResponseEntity<GlobalResponseDto<Integer>> count() {
+		return ResponseEntity.status(HttpStatus.OK)
+			.body(GlobalResponseDto.success(averageStatisticsService.count(), SuccessCode.SUCCESS));
 	}
 }
