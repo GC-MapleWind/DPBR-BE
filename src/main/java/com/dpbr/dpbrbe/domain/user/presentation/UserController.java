@@ -68,7 +68,7 @@ public class UserController {
 			.body(GlobalResponseDto.success(statisticsService.major(), SuccessCode.SUCCESS));
 	}
 
-	@Operation(summary = "로그인한 캐릭터 정보", description = "로그인한 사용자의 캐릭터 정보를 빈환합니다.")
+	@Operation(summary = "사용자 정보", description = "로그인한 사용자의 정보를 빈환합니다.")
 	@ApiResponses({
 		@ApiResponse(responseCode = "200"),
 		@ApiResponse(responseCode = "401", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
