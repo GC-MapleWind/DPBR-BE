@@ -1,9 +1,11 @@
 package com.dpbr.dpbrbe.domain.character.usecase;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.stereotype.Service;
 
+import com.dpbr.dpbrbe.domain.character.domain.Character;
 import com.dpbr.dpbrbe.domain.character.domain.repository.CharacterRepository;
 import com.dpbr.dpbrbe.domain.character.presentation.dto.response.CharacterInfoResponse;
 import com.dpbr.dpbrbe.domain.character.presentation.dto.response.CharacterRankingResponse;
@@ -17,25 +19,31 @@ public class RankService {
 	private final CharacterRepository characterRepository;
 
 	public List<CharacterRankingResponse> level() {
+		AtomicLong rank = new AtomicLong(1);
+
 		return characterRepository.findAllByOrderByLevelDesc().stream()
 			.map(character -> CharacterRankingResponse.of(
-				(long)(characterRepository.findAllByOrderByLevelDesc().indexOf(character) + 1),
+				rank.getAndIncrement(),
 				CharacterInfoResponse.from(character)))
 			.toList();
 	}
 
 	public List<CharacterRankingResponse> combatPower() {
+		AtomicLong rank = new AtomicLong(1);
+
 		return characterRepository.findAllByOrderByCombatPowerDesc().stream()
 			.map(character -> CharacterRankingResponse.of(
-				(long)(characterRepository.findAllByOrderByLevelDesc().indexOf(character) + 1),
+				rank.getAndIncrement(),
 				CharacterInfoResponse.from(character)))
 			.toList();
 	}
 
 	public List<CharacterRankingResponse> unionLevel() {
+		AtomicLong rank = new AtomicLong(1);
+
 		return characterRepository.findAllByOrderByUnionLevelDesc().stream()
 			.map(character -> CharacterRankingResponse.of(
-				(long)(characterRepository.findAllByOrderByLevelDesc().indexOf(character) + 1),
+				rank.getAndIncrement(),
 				CharacterInfoResponse.from(character)))
 			.toList();
 	}
