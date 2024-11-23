@@ -1,7 +1,7 @@
 spring:
   data:
     redis:
-      host: ENC(f98Kns4qaforukStVzUgzXJi/hhdUVfX)
+      host: ENC(Yx6ePWYuJO6/VMXsEEbuQA==)
       port: 6379
   security:
     oauth2:
@@ -13,7 +13,7 @@ spring:
             redirect-uri: ENC(XgSaOobZq5ailrG1vg+UsURNtkjlCqbd2s3J6Z/mllbuJSejUAZDVw==)
             scope: ENC(RVN8cKd2olpKaFLf2iu50NDkN2jnqJGf)
   datasource:
-    url: ENC(5IoMGixFTllGi4CW0IB/duPxxza6XIyr7w/5aKyteZmYF/CuuvHLrnNyw2hG99aU)
+    url: ENC(6JlR8GrL0AW/FPo2jppRhBHRBv8QLI34Vgc2C084BUU9nnFssRhQfg==)
     username: ENC(+XUcXvIjYlocEzOhJdVDHQ==)
     password: ENC(z78qrh/3JrfNpuxv1a9PTQNRAylKxKta)
     driver-class-name: com.mysql.cj.jdbc.Driver
