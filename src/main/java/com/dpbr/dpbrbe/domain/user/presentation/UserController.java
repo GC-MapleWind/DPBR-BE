@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.dpbr.dpbrbe.domain.character.presentation.dto.response.CharacterInfoResponse;
 import com.dpbr.dpbrbe.domain.user.presentation.dto.request.CharacterRequest;
-import com.dpbr.dpbrbe.domain.user.usecase.FindUserCharacter;
+import com.dpbr.dpbrbe.domain.user.presentation.dto.response.UserInfoResponse;
+import com.dpbr.dpbrbe.domain.user.usecase.UserInfoService;
 import com.dpbr.dpbrbe.domain.user.usecase.SaveCharacter;
 import com.dpbr.dpbrbe.domain.user.usecase.StatisticsService;
 import com.dpbr.dpbrbe.global.error.ErrorResponse;
@@ -35,7 +35,7 @@ import lombok.RequiredArgsConstructor;
 public class UserController {
 
 	private final SaveCharacter saveCharacter;
-	private final FindUserCharacter findUserCharacter;
+	private final UserInfoService userInfoService;
 	private final StatisticsService statisticsService;
 
 	@Operation(summary = "캐릭터 정보 저장", description = "사용자 캐릭터의 정보를 저장합니다.")
@@ -76,10 +76,10 @@ public class UserController {
 		@ApiResponse(responseCode = "404", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
 		@ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
-	@GetMapping("/my-character")
-	public ResponseEntity<GlobalResponseDto<CharacterInfoResponse>> findUserCharacter(
+	@GetMapping("/profile")
+	public ResponseEntity<GlobalResponseDto<UserInfoResponse>> profile(
 		@AuthenticationPrincipal UserDetails userDetails) {
 		return ResponseEntity.status(HttpStatus.OK)
-			.body(GlobalResponseDto.success(findUserCharacter.execute(userDetails), SuccessCode.SUCCESS));
+			.body(GlobalResponseDto.success(userInfoService.execute(userDetails), SuccessCode.SUCCESS));
 	}
 }
