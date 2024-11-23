@@ -20,6 +20,10 @@ public class AverageStatisticsService {
 
 	private final CharacterRepository characterRepository;
 
+	public Integer count() {
+		return characterRepository.findAll().size();
+	}
+
 	public AverageResponse level() {
 		return calculateAverage(characterRepository.findAll(), Character::getLevel);
 	}
