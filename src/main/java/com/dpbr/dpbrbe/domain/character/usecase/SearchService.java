@@ -39,7 +39,8 @@ public class SearchService {
 		List<CharacterRankingResponse> combatPowerRanking = rankService.combatPower();
 		BigDecimal combatPowerPercentage = calculatePercentage(combatPowerRanking, character.getName());
 
-		return CharacterSearchResponse.of(CharacterInfoResponse.from(character), sameWorldCharacterCount, sameJobCharacterCount,
+		return CharacterSearchResponse.of(CharacterInfoResponse.from(character), sameWorldCharacterCount,
+			sameJobCharacterCount,
 			levelPercentage, unionPercentage, combatPowerPercentage);
 	}
 
@@ -48,7 +49,7 @@ public class SearchService {
 			.filter(ranking -> ranking.info().name().equals(characterName))
 			.map(CharacterRankingResponse::ranking)
 			.map(rank -> BigDecimal.valueOf(rank)
-				.divide(BigDecimal.valueOf(rankings.size()), 2, RoundingMode.HALF_UP)
+				.divide(BigDecimal.valueOf(rankings.size()), 4, RoundingMode.HALF_UP)
 				.multiply(BigDecimal.valueOf(100)))
 			.findFirst()
 			.orElseThrow(CharacterNotFoundException::new);
