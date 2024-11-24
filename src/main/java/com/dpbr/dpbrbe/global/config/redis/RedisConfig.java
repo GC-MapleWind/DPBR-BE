@@ -9,7 +9,7 @@ import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactor
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 
 @Configuration
-@EnableRedisHttpSession
+@EnableRedisHttpSession // Session을 Redis로 관리하기 위한 어노테이션
 public class RedisConfig {
 
 	@Value("${spring.data.redis.host}")
@@ -18,6 +18,7 @@ public class RedisConfig {
 	@Value("${spring.data.redis.port}")
 	private int port;
 
+	// Redis 연결 설정
 	@Bean
 	public RedisConnectionFactory redisConnectionFactory(){
 		RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration();
@@ -27,3 +28,5 @@ public class RedisConfig {
 	}
 
 }
+
+

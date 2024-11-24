@@ -36,15 +36,15 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http
-			.httpBasic(AbstractHttpConfigurer::disable)
-			.cors((cors) -> cors
+			.httpBasic(AbstractHttpConfigurer::disable) // Basic 인증 방식 사용 안함
+			.cors((cors) -> cors // CORS 설정
 				.configurationSource(corsConfigurationSource())
 			)
-			.csrf(AbstractHttpConfigurer::disable)
-			.formLogin(AbstractHttpConfigurer::disable)
+			.csrf(AbstractHttpConfigurer::disable) // CSRF 비활성화
+			.formLogin(AbstractHttpConfigurer::disable) // Form 인증 방식 사용 안함
 			.sessionManagement(
-				(sessionManagement) -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
-			.oauth2Login(oauth2 -> oauth2.successHandler(new CustomOAuth2SuccessHandler()));
+				(sessionManagement) -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.ALWAYS)) // 세션 항상 생성
+			.oauth2Login(oauth2 -> oauth2.successHandler(new CustomOAuth2SuccessHandler())); // OAuth2 로그인
 
 		http
 			.authorizeHttpRequests((authorize) ->

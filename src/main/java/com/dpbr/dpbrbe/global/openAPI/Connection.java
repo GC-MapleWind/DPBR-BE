@@ -28,13 +28,17 @@ public class Connection {
 		StringBuilder response = new StringBuilder();
 
 		try {
+			// 요청을 보낼 URL
 			URL url = new URL(API_URL + path);
+			// URL 연결 객체 생성
 			HttpURLConnection connection = (HttpURLConnection)url.openConnection();
 
-			connection.setRequestMethod("GET");
-			connection.setRequestProperty("x-nxopen-api-key", API_KEY);
+			// header 설정
+			connection.setRequestMethod("GET"); // 요청 방식 설정
+			connection.setRequestProperty("x-nxopen-api-key", API_KEY); // API 키 설정
 
 			BufferedReader in;
+			// 요청이 성공하면 응답 반환
 			if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
 				in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
@@ -45,6 +49,7 @@ public class Connection {
 				}
 
 				in.close();
+			// 요청이 실패하면 예외 처리 및 에러 로깅
 			} else {
 				JsonObject jsonObject = JsonParser.parseString(
 						new BufferedReader(new InputStreamReader(connection.getErrorStream())).readLine())

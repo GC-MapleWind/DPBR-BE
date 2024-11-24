@@ -30,14 +30,19 @@ public class SaveCharacter {
 	private final FetchCharacterInfo fetchCharacterInfo;
 
 	public SuccessCode execute(UserDetails userDetails, CharacterRequest request) throws IOException {
+		// 토큰을 이용하여 사용자 조회
 		User user = userRepository.findByEmail(userDetails.getUsername()).orElseThrow(UserNotFoundException::new);
 
+		// 캐릭터 id를 nexon open api를 이용하여 조회
 		String ocid = fetchOcid.execute(request.name());
 
+		// 캐릭터 정보 조회
 		CharacterInfoResponse characterInfo = fetchCharacterInfo.execute(ocid);
 
+		// 캐릭터 정보를 DB에 저장
 		characterRepository.save(Character.of(ocid, request.name(), characterInfo));
 
+		// 사용자의 캐릭터 id를 저장
 		user.updateOcid(ocid);
 		userRepository.save(user);
 

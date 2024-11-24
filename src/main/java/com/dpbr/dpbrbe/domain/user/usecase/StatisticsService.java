@@ -18,8 +18,9 @@ public class StatisticsService {
 	private final UserRepository userRepository;
 
 	public Map<String, Integer> major() {
-		List<User> users = userRepository.findAll();
+		List<User> users = userRepository.findAll(); // 사용자 전체 조회
 
+		// 전공 별 사용자 수 집계
 		return users.stream()
 			.collect(Collectors.toMap(
 				User::getMajor,

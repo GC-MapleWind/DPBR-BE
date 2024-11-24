@@ -51,57 +51,67 @@ public class AuthService {
 
 	@Transactional
 	public AuthResponse getUserInfo(String code) {
-		String token = getToken(code);
-		return getUserInfoFromToken(token);
+		String token = getToken(code); // Google OAuth2.0 인증 코드를 이용하여 AccessToken 발급
+		return getUserInfoFromToken(token); // AccessToken을 이용하여 사용자 정보 조회
 	}
 
+	// Google OAuth2.0 인증 코드를 이용하여 AccessToken 발급
 	private String getToken(String code) {
-		RestTemplate restTemplate = new RestTemplate();
+		RestTemplate restTemplate = new RestTemplate(); // RestTemplate 객체 생성
 
-		HttpHeaders headers = new HttpHeaders();
-		String decode = URLDecoder.decode(code, StandardCharsets.UTF_8);
-		headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+		HttpHeaders headers = new HttpHeaders(); // HttpHeader 객체 생성
+		String decode = URLDecoder.decode(code, StandardCharsets.UTF_8); //	code 디코딩
+		headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8"); // Content-type 설정
 
+		// AccessToken 발급을 위한 요청 Body 생성
 		MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
 		body.add("grant_type", "authorization_code");
 		body.add("client_id", clientId);
 		body.add("redirect_uri", redirectUri);
 		body.add("code", decode);
 		body.add("client_secret", clientSecret);
-
 		HttpEntity<MultiValueMap<String, String>> tokenRequest = new HttpEntity<>(body, headers);
 
+		// AccessToken 발급 요청
 		ResponseEntity<String> response = restTemplate.postForEntity(TOKEN_URI, tokenRequest, String.class);
 
+		// AccessToken 반환
 		return GoogleAccessToken.from(response.getBody()).accessToken();
 	}
 
+	// AccessToken을 이용하여 사용자 정보 조회
 	private AuthResponse getUserInfoFromToken(String token) {
-		RestTemplate restTemplate = new RestTemplate();
-		HttpHeaders headers = new HttpHeaders();
+		RestTemplate restTemplate = new RestTemplate(); // RestTemplate 객체 생성
 
-		headers.add("Authorization", "Bearer " + token);
-		headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-
+		// 요청 Header 설정
+		HttpHeaders headers = new HttpHeaders(); // HttpHeader 객체 생성
+		headers.add("Authorization", "Bearer " + token); // 헤더에 AccessToken 추가
+		headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8"); // Content-type 설정
 		HttpEntity<Void> profileRequest = new HttpEntity<>(headers);
 
+		// 사용자 정보 조회 요청
 		ResponseEntity<String> response = restTemplate.exchange(USER_INFO_URI, HttpMethod.GET, profileRequest,
 			String.class);
 
+		// 사용자 정보 조회 후 User 객체 생성
 		User user = getUser(GoogleProfile.from(response.getBody()));
 
+		// AccessToken, RefreshToken 생성 후 반환
 		return createToken(user);
 	}
 
 	private User getUser(GoogleProfile googleProfile) {
-		String email = googleProfile.email();
-		String name = googleProfile.name();
+		String email = googleProfile.email(); // 사용자 이메일
+		String name = googleProfile.name(); // 사용자 이름
 
+		// 가천대 클라우드 이메일이 아니면 예외 처리
 		if (!email.endsWith(suffix)) {
 			throw new InvalidEmailException();
 		}
 
-		return userRepository.findByEmail(email).orElseGet(() -> userRepository.save(User.create(email, name, Role.USER)));
+		// 사용자 정보가 없으면 User 객체 생성 후 저장 (회원 가입)
+		return userRepository.findByEmail(email)
+			.orElseGet(() -> userRepository.save(User.create(email, name, Role.USER)));
 	}
 
 	private AuthResponse createToken(User user) {

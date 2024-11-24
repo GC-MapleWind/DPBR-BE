@@ -56,8 +56,9 @@ public class User extends BaseTimeEntity {
 		this.role = role;
 	}
 
+	// 사용자 객체 생성 메서드
 	public static User create(String email, String name, Role role) {
-		String[] nameArr = name.split("/");
+		String[] nameArr = name.split("/"); // 이름과 학과를 구분하여 저장
 
 		return User.builder()
 			.email(email)

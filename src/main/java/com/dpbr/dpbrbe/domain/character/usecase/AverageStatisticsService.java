@@ -20,22 +20,27 @@ public class AverageStatisticsService {
 
 	private final CharacterRepository characterRepository;
 
+	// 캐릭터의 전체 수 조회
 	public Integer count() {
 		return characterRepository.findAll().size();
 	}
 
+	// 레벨 평균 조회
 	public CharacterAverageResponse level() {
 		return calculateAverage(characterRepository.findAll(), Character::getLevel);
 	}
 
+	// 전투력 평균 조회
 	public CharacterAverageResponse combatPower() {
 		return calculateAverage(characterRepository.findAll(), Character::getCombatPower);
 	}
 
+	// 유니온 레벨 평균 조회
 	public CharacterAverageResponse unionLevel() {
 		return calculateAverage(characterRepository.findAll(), Character::getUnionLevel);
 	}
 
+	// 평균 산출 (int)
 	private CharacterAverageResponse calculateAverage(List<Character> characters, ToIntFunction<Character> mapper) {
 		if (characters.isEmpty()) {
 			return CharacterAverageResponse.form(BigDecimal.ZERO);
@@ -47,6 +52,7 @@ public class AverageStatisticsService {
 		return CharacterAverageResponse.form(average);
 	}
 
+	// 평균 산출 (long)
 	private CharacterAverageResponse calculateAverage(List<Character> characters, ToLongFunction<Character> mapper) {
 		if (characters.isEmpty()) {
 			return CharacterAverageResponse.form(BigDecimal.ZERO);

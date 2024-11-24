@@ -24,10 +24,13 @@ public class UpdateInfoService {
 	private final CharacterRepository characterRepository;
 
 	public SuccessCode execute(UpdateRequest request) throws IOException {
+		// 캐릭터 정보 조회
 		Character character = characterRepository.findByName(request.name())
 			.orElseThrow(CharacterNotFoundException::new);
+		// NEXON OPEN API를 이용하여 갱신된 정보 호출
 		character.updateInfo(fetchCharacterInfo.execute(character.getOcid()));
 
+		// 갱신된 정보 저장
 		characterRepository.save(character);
 
 		return UPDATE_CHARACTER_SUCCESS;
@@ -36,6 +39,7 @@ public class UpdateInfoService {
 	// 매일 새벽 3시에 실행
 	@Scheduled(cron = "0 0 3 * * ?")
 	public void executeDailyTask() {
+		// 모든 캐릭터 정보 갱신
 		characterRepository.findAll().parallelStream().forEach(character -> {
 			try {
 				character.updateInfo(fetchCharacterInfo.execute(character.getOcid()));
