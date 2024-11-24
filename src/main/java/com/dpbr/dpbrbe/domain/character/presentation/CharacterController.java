@@ -15,10 +15,10 @@ import com.dpbr.dpbrbe.domain.character.presentation.dto.request.UpdateRequest;
 import com.dpbr.dpbrbe.domain.character.presentation.dto.response.CharacterAverageResponse;
 import com.dpbr.dpbrbe.domain.character.presentation.dto.response.CharacterInfoResponse;
 import com.dpbr.dpbrbe.domain.character.presentation.dto.response.CharacterRankingResponse;
-import com.dpbr.dpbrbe.domain.character.presentation.dto.response.CharacterSearchResponse;
+import com.dpbr.dpbrbe.domain.character.presentation.dto.response.CharacterDetailInfoResponse;
 import com.dpbr.dpbrbe.domain.character.usecase.AverageStatisticsService;
 import com.dpbr.dpbrbe.domain.character.usecase.RankService;
-import com.dpbr.dpbrbe.domain.character.usecase.SearchService;
+import com.dpbr.dpbrbe.domain.character.usecase.DetailInfoService;
 import com.dpbr.dpbrbe.domain.character.usecase.UpdateInfoService;
 import com.dpbr.dpbrbe.global.error.ErrorResponse;
 import com.dpbr.dpbrbe.global.response.GlobalResponseDto;
@@ -37,7 +37,7 @@ import lombok.RequiredArgsConstructor;
 public class CharacterController {
 
 	private final RankService rankService;
-	private final SearchService searchService;
+	private final DetailInfoService detailInfoService;
 	private final UpdateInfoService updateInfoService;
 	private final AverageStatisticsService averageStatisticsService;
 
@@ -55,7 +55,7 @@ public class CharacterController {
 			.body(GlobalResponseDto.success(updateInfoService.execute(request)));
 	}
 
-	@Operation(summary = "캐릭터 검색", description = "사용자 캐릭터의 정보를 검색합니다.")
+	@Operation(summary = "캐릭터 상세정보", description = "캐릭터의 상세 정보를 호출합니다.")
 	@ApiResponses({
 		@ApiResponse(responseCode = "200"),
 		@ApiResponse(responseCode = "401", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
@@ -63,10 +63,10 @@ public class CharacterController {
 		@ApiResponse(responseCode = "404", content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
 		@ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
-	@GetMapping("/search")
-	public ResponseEntity<GlobalResponseDto<CharacterSearchResponse>> SearchCharacter(SearchRequest request) {
+	@GetMapping("/info")
+	public ResponseEntity<GlobalResponseDto<CharacterDetailInfoResponse>> CharacterDetailInfo(SearchRequest request) {
 		return ResponseEntity.status(HttpStatus.OK)
-			.body(GlobalResponseDto.success(searchService.execute(request), SuccessCode.SUCCESS));
+			.body(GlobalResponseDto.success(detailInfoService.execute(request), SuccessCode.SUCCESS));
 	}
 
 	@Operation(summary = "캐릭터 레벨 랭킹", description = "전체 캐릭터의 레벨 순위를 호출합니다.")
